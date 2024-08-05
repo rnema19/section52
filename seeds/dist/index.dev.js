@@ -49,7 +49,7 @@ var seedDB = function seedDB() {
           random1000 = Math.floor(Math.random() * 1000);
           price = Math.floor(Math.random() * 20) + 10;
           camp = new Campground({
-            author: '669a315ddd126d1310b234b9',
+            author: '669fb441ee58c2cdc232f918',
             location: "".concat(cities[random1000].city, ", ").concat(cities[random1000].state),
             title: "".concat(sample(descriptors), " ").concat(sample(places)),
             image: "https://picsum.photos/200/300",
