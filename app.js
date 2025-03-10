@@ -10,14 +10,18 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const cookieparser = require('cookie-parser')
+const dotenv = require('dotenv');
 
+dotenv.config()
 
 const userRoutes = require('./routes/users')
 const campgroundRoutes = require('./routes/campgrounds')
 const reviewsRoutes = require('./routes/reviews')
 // const cookie = require('express-session/session/cookie')
 
-mongoose.connect('mongodb://localhost:27017/yelp-camp').
+const url = "mongodb+srv://rnema19:pass1234@cluster0.pmku2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+
+mongoose.connect(url).
     then(() => {
         console.log("Connection Successful!!!")
     })
@@ -38,6 +42,7 @@ const app = express()
 app.engine('ejs',ejsMate)
 app.set('view engine', 'ejs');
 app.set('views',path.join(__dirname,'/views'))
+
 
 // app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.urlencoded({extended:true}))
@@ -93,7 +98,7 @@ app.use('/campgrounds',campgroundRoutes)
 app.use('/campgrounds/:id/reviews',reviewsRoutes)
 
 app.get('/',(req,res)=>{
-    res.render('home')
+    res.render('./users/login')
 })
 
 app.all('*',(req,res,next)=>{

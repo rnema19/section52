@@ -24,6 +24,10 @@ var User = require('./models/user');
 
 var cookieparser = require('cookie-parser');
 
+var dotenv = require('dotenv');
+
+dotenv.config();
+
 var userRoutes = require('./routes/users');
 
 var campgroundRoutes = require('./routes/campgrounds');
@@ -31,7 +35,8 @@ var campgroundRoutes = require('./routes/campgrounds');
 var reviewsRoutes = require('./routes/reviews'); // const cookie = require('express-session/session/cookie')
 
 
-mongoose.connect('mongodb://localhost:27017/yelp-camp').then(function () {
+var url = "mongodb+srv://rnema19:pass1234@cluster0.pmku2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+mongoose.connect(url).then(function () {
   console.log("Connection Successful!!!");
 })["catch"](function (error) {
   console.log("Oh no error");
@@ -113,7 +118,7 @@ app.use('/', userRoutes);
 app.use('/campgrounds', campgroundRoutes);
 app.use('/campgrounds/:id/reviews', reviewsRoutes);
 app.get('/', function (req, res) {
-  res.render('home');
+  res.render('./users/login');
 });
 app.all('*', function (req, res, next) {
   next(new expressError('Page not found!!', 404));
